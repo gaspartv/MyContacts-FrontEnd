@@ -1,5 +1,5 @@
 import React from "react";
-import { Loading } from "../components/load.components";
+import { Loading } from "../components/load.component";
 import { iContextProps, iLoadContext } from "../interfaces";
 
 export const LoadContext = React.createContext({} as iLoadContext);

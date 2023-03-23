@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { animationEntring } from "./animations";
+import { animationEntring } from "./animations.style";
 
 export const StyledForm = styled.main`
   height: 100vh;

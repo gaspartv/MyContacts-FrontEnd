@@ -15,6 +15,17 @@ export interface iLogin {
 export interface iClientContext {
   client: iClient | null;
   setClient: React.Dispatch<React.SetStateAction<iClient | null>>;
+
+  contacts: iClient[];
+  setContacts: React.Dispatch<React.SetStateAction<iClient[]>>;
+
+  newContactModel: boolean;
+  setNewContactModel: React.Dispatch<React.SetStateAction<boolean>>;
+
+  editClientModel: boolean;
+  setEditClientModel: React.Dispatch<React.SetStateAction<boolean>>;
+
+  logout: () => void;
 }
 
 export interface iClient {
@@ -31,4 +42,17 @@ export interface iRegister {
   password: string;
   tel: string;
   repeatPassword?: string;
+}
+
+export interface iContact {
+  name: string;
+  email: string;
+  tel: string;
+}
+
+export interface iEditClient {
+  name?: string;
+  email?: string;
+  password?: string;
+  tel?: string;
 }
