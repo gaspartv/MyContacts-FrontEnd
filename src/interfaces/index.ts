@@ -25,6 +25,18 @@ export interface iClientContext {
   editClientModel: boolean;
   setEditClientModel: React.Dispatch<React.SetStateAction<boolean>>;
 
+  editContactModel: boolean;
+  setEditContactModel: React.Dispatch<React.SetStateAction<boolean>>;
+
+  deleteContactModel: boolean;
+  setDeleteContactModel: React.Dispatch<React.SetStateAction<boolean>>;
+
+  deleteClientModel: boolean;
+  setDeleteClientModel: React.Dispatch<React.SetStateAction<boolean>>;
+
+  contactId: iClient;
+  setContactId: React.Dispatch<React.SetStateAction<iClient>>;
+
   logout: () => void;
 }
 
@@ -34,6 +46,13 @@ export interface iClient {
   name: string;
   registered_at: string;
   tel: string;
+}
+
+export interface iEditClient {
+  name?: string;
+  email?: string;
+  password?: string;
+  tel?: string;
 }
 
 export interface iRegister {
@@ -50,9 +69,8 @@ export interface iContact {
   tel: string;
 }
 
-export interface iEditClient {
+export interface iEditContact {
   name?: string;
   email?: string;
-  password?: string;
   tel?: string;
 }

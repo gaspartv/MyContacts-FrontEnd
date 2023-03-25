@@ -1,17 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
+import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import { ClientContext, LoadContext } from "@/src/contexts";
 import { iLogin } from "@/src/interfaces";
-import { schemaLogin } from "@/src/schemas/login.schema";
-import { LoadContext } from "@/src/contexts/load.context";
+import { schemaLogin } from "@/src/schemas";
 import { api } from "@/src/services";
-import { toast } from "react-toastify";
-import { ClientContext } from "@/src/contexts/client.context";
-import { StyledLink, StyledForm } from "@/src/styles/form.style";
-import { StyledButton } from "@/src/styles/button.styled";
+import { StyledButton, StyledForm, StyledLink } from "@/src/styles";
 
 const LoginPage = () => {
   const { setLoad } = React.useContext(LoadContext);

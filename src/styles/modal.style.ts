@@ -56,13 +56,12 @@ export const StyledModal = styled.section`
           margin-top: 3px;
           padding: 8px;
           border: none;
-          color: var(--color-grey-1);
+          color: var(--color-black);
           letter-spacing: 1px;
           border-radius: 3px;
           background-color: var(--color-grey-3);
           ::placeholder {
-            text-transform: uppercase;
-            border-bottom: 1px solid black;
+            color: var(--color-grey-1);
           }
           :focus {
             outline: 1px solid var(--color-fourth);

@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { LoadContext } from "@/src/contexts/load.context";
-import { useRouter } from "next/router";
 import React from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { iRegister } from "@/src/interfaces";
-import { schemaRegister } from "@/src/schemas/register.schema";
-import { api } from "@/src/services";
-import { toast } from "react-toastify";
 import Head from "next/head";
-import { StyledLink, StyledForm } from "@/src/styles/form.style";
-import { StyledButton } from "@/src/styles/button.styled";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { LoadContext } from "@/src/contexts";
+import { iRegister } from "@/src/interfaces";
+import { schemaRegister } from "@/src/schemas";
+import { api } from "@/src/services";
+import { StyledButton, StyledForm, StyledLink } from "@/src/styles";
 
 const RegisterPage = () => {
   const { setLoad } = React.useContext(LoadContext);
@@ -76,7 +76,7 @@ const RegisterPage = () => {
 
             <div>
               <label>Tel</label>
-              <input type="text" {...register("tel")} />
+              <input type="number" {...register("tel")} />
               <p>{errors.tel && errors.tel.message}</p>
             </div>
 

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+
 import { iClient, iClientContext, iContextProps } from "../interfaces";
 import { LoadContext } from "./load.context";
 
@@ -14,9 +15,20 @@ const ClientProvider = ({ children }: iContextProps) => {
 
   const [contacts, setContacts] = React.useState<iClient[]>([]);
 
+  const [editClientModel, setEditClientModel] = React.useState<boolean>(false);
+
   const [newContactModel, setNewContactModel] = React.useState<boolean>(false);
 
-  const [editClientModel, setEditClientModel] = React.useState<boolean>(false);
+  const [editContactModel, setEditContactModel] =
+    React.useState<boolean>(false);
+
+  const [deleteContactModel, setDeleteContactModel] =
+    React.useState<boolean>(false);
+
+  const [deleteClientModel, setDeleteClientModel] =
+    React.useState<boolean>(false);
+
+  const [contactId, setContactId] = React.useState<iClient>({} as iClient);
 
   const logout = () => {
     setClient(null);
@@ -37,6 +49,14 @@ const ClientProvider = ({ children }: iContextProps) => {
         setNewContactModel,
         editClientModel,
         setEditClientModel,
+        editContactModel,
+        setEditContactModel,
+        contactId,
+        setContactId,
+        deleteContactModel,
+        setDeleteContactModel,
+        deleteClientModel,
+        setDeleteClientModel,
       }}
     >
       {children}

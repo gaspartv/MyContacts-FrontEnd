@@ -13,6 +13,7 @@ export const StyledHome = styled.main`
       border-radius: 3px;
       margin-top: 15px;
       > li {
+        position: relative;
         display: flex;
         flex-direction: column;
         gap: 5px;
@@ -27,8 +28,22 @@ export const StyledHome = styled.main`
           letter-spacing: 1px;
         }
         :hover {
-          cursor: pointer;
+          cursor: default;
           transform: scale(1.05, 1.05);
+        }
+        .imgEdit {
+          position: absolute;
+          width: 15px;
+          bottom: 4px;
+          right: 25px;
+          cursor: pointer;
+        }
+        .imgTrash {
+          position: absolute;
+          width: 15px;
+          bottom: 4px;
+          right: 4px;
+          cursor: pointer;
         }
       }
     }
@@ -41,6 +56,7 @@ export const StyledHome = styled.main`
       border: 1px solid var(--color-third);
       border-radius: 3px;
       > span {
+        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -51,39 +67,22 @@ export const StyledHome = styled.main`
           color: var(--color-grey-3);
           letter-spacing: 1px;
         }
-        > button {
-          background-color: var(--color-fourth);
-          color: var(--color-grey-3);
-          font-weight: 400;
-          height: 67%;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-          border: 1px solid var(--color-fourth);
-          border-radius: 3px;
-          transform: translate(0);
-          overflow: hidden;
+        > span {
+          min-width: 50px;
+        }
+        .imgEdit {
+          position: absolute;
+          width: 15px;
+          bottom: 18px;
+          right: 25px;
           cursor: pointer;
-          width: 50px;
-          box-shadow: 1px 1px 5px 0px black;
-          margin-right: 8px;
-          ::before {
-            content: "";
-            position: absolute;
-            background: var(--color-seconday);
-            width: 8px;
-            top: 0;
-            bottom: 0;
-            left: -32px;
-            transform: rotate(-16deg);
-            filter: blur(6px);
-          }
-          :hover::before {
-            left: calc(100% + 32px);
-            transition: 0.75s;
-          }
-          :hover {
-            color: var(--color-white);
-          }
+        }
+        .imgTrash {
+          position: absolute;
+          width: 15px;
+          bottom: 18px;
+          right: 4px;
+          cursor: pointer;
         }
       }
     }

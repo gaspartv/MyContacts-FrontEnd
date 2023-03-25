@@ -4,26 +4,26 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 
 import { ClientContext, LoadContext } from "../contexts";
-import { schemaEditClient } from "../schemas";
-import { iEditClient } from "../interfaces";
+import { iEditContact } from "../interfaces";
+import { schemaEditContact } from "../schemas";
 import { api } from "../services";
 import { StyledModal } from "../styles";
 
-export const EditClientModal = () => {
+export const EditContactModal = () => {
   const { setLoad } = React.useContext(LoadContext);
 
-  const { client, setClient, setEditClientModel } =
+  const { contacts, setContacts, setEditContactModel, contactId } =
     React.useContext(ClientContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iEditClient>({
-    resolver: yupResolver(schemaEditClient),
+  } = useForm<iEditContact>({
+    resolver: yupResolver(schemaEditContact),
   });
 
-  const sendEditClient = async (dataEdit: any) => {
+  const sendEditContact = async (dataEdit: any) => {
     setLoad(true);
 
     const data = {} as any;
@@ -38,20 +38,23 @@ export const EditClientModal = () => {
       const token: string | null = localStorage.getItem("token");
 
       if (token) {
-        const clientEdit = await api.patch("/client", data, {
+        const contact = await api.patch(`/contacts/${contactId.id}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        toast.success("Successfully edited.");
+        toast.success("contact successfully added.");
 
-        setClient(clientEdit.data);
+        const contactsRemove = contacts.filter((el) => el.id !== contactId.id);
+
+        setContacts([contact.data, ...contactsRemove]);
       }
     } catch (error: any) {
+      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       setTimeout(() => {
         setLoad(false);
-        setEditClientModel(false);
+        setEditContactModel(false);
       }, 500);
     }
   };
@@ -59,14 +62,14 @@ export const EditClientModal = () => {
   return (
     <StyledModal>
       <div>
-        <h3>Edit client</h3>
-        <form onSubmit={handleSubmit(sendEditClient)}>
+        <h3>Edit contact</h3>
+        <form onSubmit={handleSubmit(sendEditContact)}>
           <div>
             <label>Name</label>
             <input
               type="text"
               {...register("name")}
-              placeholder={client?.name}
+              placeholder={contactId.name}
             />
             <p>{errors.name && errors.name.message}</p>
           </div>
@@ -75,7 +78,7 @@ export const EditClientModal = () => {
             <input
               type="text"
               {...register("email")}
-              placeholder={client?.email}
+              placeholder={contactId.email}
             />
             <p>{errors.email && errors.email.message}</p>
           </div>
@@ -84,26 +87,17 @@ export const EditClientModal = () => {
             <input
               type="number"
               {...register("tel")}
-              placeholder={client?.tel}
+              placeholder={contactId.tel}
             />
             <p>{errors.tel && errors.tel.message}</p>
-          </div>
-          <div>
-            <label>Password</label>
-            <input
-              type="text"
-              {...register("password")}
-              placeholder={"*********"}
-            />
-            <p>{errors.password && errors.password.message}</p>
           </div>
           <div>
             <div>
               <button type="submit">Edit</button>
               <button
-                onClick={(event: any) => {
+                onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                   event.preventDefault();
-                  setEditClientModel(false);
+                  setEditContactModel(false);
                 }}
               >
                 Cancel

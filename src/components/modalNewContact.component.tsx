@@ -1,26 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ClientContext } from "../contexts/client.context";
-import { StyledModal } from "../styles/modal.style";
-import { iContact } from "../interfaces";
-import { schemaNewContact } from "../schemas/contact.schema";
-import { LoadContext } from "../contexts/load.context";
-import { api } from "../services";
 import { toast } from "react-toastify";
+
+import { api } from "../services";
+import { ClientContext, LoadContext } from "../contexts";
+import { schemaNewContact } from "../schemas";
+import { iContact } from "../interfaces";
+import { StyledModal } from "../styles";
 
 export const NewContactModal = () => {
   const { setLoad } = React.useContext(LoadContext);
 
-  const {
-    client,
-    setClient,
-    contacts,
-    setContacts,
-    logout,
-    newContactModel,
-    setNewContactModel,
-  } = React.useContext(ClientContext);
+  const { contacts, setContacts, setNewContactModel } =
+    React.useContext(ClientContext);
 
   const {
     register,
@@ -42,10 +35,10 @@ export const NewContactModal = () => {
 
         toast.success("contact successfully added.");
 
-        setContacts([...contacts, contact.data]);
+        setContacts([contact.data, ...contacts]);
       }
     } catch (error: any) {
-      console.log(error.response.data);
+      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       setTimeout(() => {
@@ -72,7 +65,7 @@ export const NewContactModal = () => {
           </div>
           <div>
             <label>Tel</label>
-            <input type="text" {...register("tel")} />
+            <input type="number" {...register("tel")} />
             <p>{errors.tel && errors.tel.message}</p>
           </div>
           <div>

@@ -1,14 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import { Header } from "@/src/components/header.component";
-import { EditClientModal } from "@/src/components/modalEditClient.component";
-import { NewContactModal } from "@/src/components/modalNewContact.component";
-import { ClientContext } from "@/src/contexts/client.context";
-import { LoadContext } from "@/src/contexts/load.context";
-import { api } from "@/src/services";
-import { StyledHome } from "@/src/styles/home.style";
-import Head from "next/head";
 import React from "react";
+import Head from "next/head";
+
+import { ClientContext, LoadContext } from "@/src/contexts";
+import { api } from "@/src/services";
+import { StyledHome } from "@/src/styles";
+import {
+  Header,
+  EditClientModal,
+  DeleteClientModal,
+  NewContactModal,
+  EditContactModal,
+  DeleteContactModal,
+} from "@/src/components";
 
 export default function Home() {
   const { setLoad } = React.useContext(LoadContext);
@@ -16,13 +21,28 @@ export default function Home() {
   const {
     client,
     setClient,
+
     contacts,
     setContacts,
-    logout,
+
     newContactModel,
     setNewContactModel,
+
     editClientModel,
     setEditClientModel,
+
+    editContactModel,
+    setEditContactModel,
+
+    setContactId,
+
+    deleteContactModel,
+    setDeleteContactModel,
+
+    deleteClientModel,
+    setDeleteClientModel,
+
+    logout,
   } = React.useContext(ClientContext);
 
   React.useEffect(() => {
@@ -48,7 +68,9 @@ export default function Home() {
       } catch (error) {
         logout();
       } finally {
-        setLoad(false);
+        setTimeout(() => {
+          setLoad(false);
+        }, 500);
       }
     };
 
@@ -60,8 +82,11 @@ export default function Home() {
       <Head>
         <title>My contacts - Home</title>
       </Head>
-      {newContactModel && <NewContactModal />}
       {editClientModel && <EditClientModal />}
+      {deleteClientModel && <DeleteClientModal />}
+      {newContactModel && <NewContactModal />}
+      {editContactModel && <EditContactModal />}
+      {deleteContactModel && <DeleteContactModal />}
       <Header />
       <StyledHome>
         <div className="container">
@@ -70,7 +95,23 @@ export default function Home() {
               <p>{client?.name}</p>
               <p>{client?.email}</p>
               <p>{client?.tel}</p>
-              <button onClick={() => setEditClientModel(true)}>Edit</button>
+              <span></span>
+              <img
+                src="/images/edit.png"
+                alt="edit icon"
+                className="imgEdit"
+                onClick={() => {
+                  setEditClientModel(true);
+                }}
+              />
+              <img
+                src="/images/trash.png"
+                alt="trash icon"
+                className="imgTrash"
+                onClick={() => {
+                  setDeleteClientModel(true);
+                }}
+              />
             </span>
           </div>
         </div>
@@ -86,11 +127,29 @@ export default function Home() {
                     <strong> Name:</strong> {el.name}
                   </p>
                   <p>
-                    <strong>E-mail:</strong> {el.email}
+                    <strong>Email:</strong> {el.email}
                   </p>
                   <p>
                     <strong>Tel:</strong> {el.tel}
                   </p>
+                  <img
+                    src="/images/edit.png"
+                    alt="edit icon"
+                    className="imgEdit"
+                    onClick={() => {
+                      setContactId(el);
+                      setEditContactModel(true);
+                    }}
+                  />
+                  <img
+                    src="/images/trash.png"
+                    alt="trash icon"
+                    className="imgTrash"
+                    onClick={() => {
+                      setContactId(el);
+                      setDeleteContactModel(true);
+                    }}
+                  />
                 </li>
               ))}
           </ul>

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useContext } from "react";
-import { ClientContext } from "../contexts/client.context";
-import { StyledHeader } from "../styles/header.style";
+import { ClientContext } from "../contexts";
+import { StyledHeader } from "../styles";
 
 export const Header = () => {
   const { logout } = useContext(ClientContext);
