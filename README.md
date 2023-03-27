@@ -11,7 +11,9 @@ Vamos começar pelo Back-end:
 
 1º acesse o link acima e clone o repositório.
 
-2º abra o terminal na pasta que você clonou e execute os seguintes comandos:
+2º tem um arquivo .env.exemplo copie e renomeie a copia para .env e passe suas configurações, banco de dados utilizado PostgreSQL.
+
+3º abra o terminal na pasta que você clonou e execute os seguintes comandos:
 
     yarn install
     
@@ -21,6 +23,7 @@ Vamos começar pelo Back-end:
 Caso queira da uma olhada nos testes e só digitar o comando:
 
     yarn test
+
 
 
 Pronto o servidor back-end já está rodando na rota http://localhost:3001 você pode testa-lo utilizando o insomnia, na raiz do projeto tem um arquivo chamado insomnia.json, você pode utilizar ele no seu insomnia para testar as rotas.
@@ -35,6 +38,7 @@ Vamos para o Front-end:
     yarn install
     
     yarn dev
+
 
 
 Pronto o servidor front-end já está rodando, você pode testa-lo acessando http://localhost:3000
